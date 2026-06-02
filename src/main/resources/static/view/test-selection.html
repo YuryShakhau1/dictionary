@@ -1,0 +1,42 @@
+<html ng-app="dictionaryModule">
+<head>
+	<title>Test selection</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="../js/url-helper.js" type="text/javascript"></script>
+	<script src="../js/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="../js/bootstrap.js" type="text/javascript"></script>
+	<script src="../js/angular.js" type="text/javascript"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/dictionary-module.js"></script>
+	<script src="../js/test-selection.js" type="text/javascript"></script>
+</head>
+<body ng-controller="testSelectionController">
+	<div class="container">
+		<div>
+			<a ng-show="fileId" href="../view/file.html{{currentUri}}">Back</a>
+			<a ng-show="folderId && !fileId" href="../view/file-system.html{{currentUri}}">Back</a>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item active">Tests</div>
+			<div>
+				<a class="list-group-item"
+					ng-href="../view/word-list-test.html?status={{DO_NOT_KNOW}}&folderId={{folderId}}&fileId={{fileId}}">
+					Want to know test
+				</a>
+				<a class="list-group-item"
+					ng-href="../view/word-list-test.html?status={{HAVE_KNOWN}}&folderId={{folderId}}&fileId={{fileId}}">
+					Already know test
+				</a>
+				<a class="list-group-item"
+					ng-href="../view/word-list-test.html?status={{ALMOST_KNOW}}&folderId={{folderId}}&fileId={{fileId}}">
+					Almost know
+				</a>
+				<a class="list-group-item"
+					ng-href="../view/word-list-test.html?status={{KNOW}}&{{currentUri}}">
+					Know test
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

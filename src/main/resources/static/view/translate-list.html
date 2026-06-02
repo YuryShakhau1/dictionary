@@ -1,0 +1,39 @@
+<html ng-app="dictionaryModule" ng-controller="translateListController">
+<head>
+	<title>Translate</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="../js/url-helper.js" type="text/javascript"></script>
+	<script src="../js/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="../js/bootstrap.js" type="text/javascript"></script>
+	<script src="../js/angular.js" type="text/javascript"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/dictionary-module.js"></script>
+	<script src="../js/translate-list.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="container">
+		<div>
+			<a ng-show="fileId" href="../view/file.html{{currentUri}}">Back</a>
+			<a ng-show="folderId && !fileId" href="../view/file-system.html{{currentUri}}">Back</a>
+		</div>
+		<div>
+			<span ng-show="wordStatus != 1"><a href="../view/translate-list.html?{{uriWithoutWordStatus}}&wordStatus=1">Don't know translates</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span ng-show="wordStatus != 2"><a href="../view/translate-list.html?{{uriWithoutWordStatus}}&wordStatus=2">Already know translates</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span ng-show="wordStatus != 3"><a href="../view/translate-list.html?{{uriWithoutWordStatus}}&wordStatus=3">Almost know translates</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span ng-show="wordStatus != KNOW"><a href="../view/translate-list.html?{{uriWithoutWordStatus}}&wordStatus=0">Know translates</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span ng-show="wordStatus != EXCLUDED"><a href="../view/translate-list.html?{{uriWithoutWordStatus}}&wordStatus=0">Know translates</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div>
+			<h3 ng-show="wordStatus == 1">Don't know translates</h3>
+			<h3 ng-show="wordStatus == 2">Already know translates</h3>
+			<h3 ng-show="wordStatus == 3">Almost know translates</h3>
+			<h3 ng-show="wordStatus == KNOW">Know translates</h3>
+			<h3 ng-show="wordStatusFrom >= DO_NOT_KNOW">Unknown translates</h3>
+		</div>
+		<div class="row">
+			<div ng-include="'fragment/frequency-translate-word-list.html'"></div>
+		</div>
+	</div>
+</body>
+</html>

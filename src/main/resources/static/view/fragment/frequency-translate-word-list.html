@@ -1,0 +1,34 @@
+<div class="col-md-8">
+	<div>
+		<input class="form-control form-control-block" type="text" ng-model="wordSearch"/>
+	</div>
+	<table class="table">
+		<tr class="active">
+			<th class="col-md-4">Word</th>
+			<th class="col-md-5">Transcription</th>
+			<th class="col-md-3">Translate</th>
+			<th class="col-md-1"></th>
+		</tr>
+		<tbody ng-repeat="word in words | filter:wordSearch ">
+			<tr ng-repeat="transl in word.translates">
+				<td class="word">
+					<div ng-if="$first">
+						<a class="word" href="https://translate.google.com/#en/ru/{{word.value}}" target="_blank">
+							{{word.value}}
+						</a>
+					</div>
+				</td>
+				<td class="word">
+					<div ng-if="$first">{{word.transcription}}</div>
+				</td>
+				<td class="word">{{transl.translateWord.value}}</td>
+				<td class="change-translate">
+					<a ng-if="$first" class="btn btn-{{word.translates.length ? 'primary' : 'warning'}}"
+						ng-href="../view/edit-translate.html?wordId={{word.id}}" target="_blank">
+						{{word.translates.length ? 'Change translate' : 'Add translate'}}
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

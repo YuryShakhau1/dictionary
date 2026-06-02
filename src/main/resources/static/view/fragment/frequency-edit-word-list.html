@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-md-3 link">
+		<a href="../export/all">Export user db</a>
+	</div>
+	<div class="col-md-3 link">
+		<a href="../view/test-selection.html{{currentUri}}">Tests</a>
+	</div>
+	<div class="col-md-3 link">
+		<a href="../view/word-translates.html">Some words</a>
+	</div>
+</div>
+<div class="row">
+	<input class="form-control form-control-block" type="text" ng-model="wordSearch"/>
+</div>
+<div class="row">
+	<div class="col-md-3 link">
+		<div class="word">Count: {{wordFrequencyInfo.frequencies.length}}</div>
+	</div>
+</div>
+<div class="row" ng-repeat="wordFrequency in wordFrequencyInfo.frequencies | filter:wordSearch | orderBy:'frequency':true">
+	<div class="col-md-3">
+		<a class="word" href="https://translate.google.com/#en/ru/{{wordFrequency.word.value}}" target="_blank">{{wordFrequency.word.value}}</a>
+	</div>
+	<div class="col-md-1">{{wordFrequency.frequency}}</div>
+		<div class="col-md-4" ng-if="wordFrequency.wordStatus == null">
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn btn-success btn-block" ng-click="addUserWord(wordFrequency.word.id, KNOW)">Know</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-danger btn-block" ng-click="addUserWord(wordFrequency.word.id, DO_NOT_KNOW)">To learn</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2" ng-if="wordFrequency.wordStatus == EXCLUDED || wordFrequency.wordStatus == KNOW">
+			<button class="btn btn-danger btn-block" ng-click="addUserWord(wordFrequency.word.id, DO_NOT_KNOW)">To learn</button>
+		</div>
+		<div class="col-md-2" ng-if="wordFrequency.wordStatus == EXCLUDED || wordFrequency.wordStatus >= DO_NOT_KNOW">
+			<button class="btn btn-success btn-block" ng-click="addUserWord(wordFrequency.word.id, KNOW)">Know</button>
+		</div>
+		<div class="col-md-2">
+			<a class="btn btn-{{wordFrequency.word.translates.length ? 'primary' : 'warning'}} btn-block"
+			   ng-href="../view/edit-translate.html?wordId={{wordFrequency.word.id}}" target="_blank">
+				{{wordFrequency.word.translates.length ? 'Translate' : 'Add translate'}}
+			</a>
+		</div>
+		<div class="col-md-2" ng-if="wordFrequency.wordStatus == null || wordFrequency.wordStatus == KNOW">
+			<button class="btn btn-warning btn-block" ng-click="addUserWord(wordFrequency.word.id, EXCLUDED)">Exclude</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+<html ng-app="dictionaryModule">
+<head>
+	<title>Languages</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="../js/url-helper.js" type="text/javascript"></script>
+	<script src="../js/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="../js/bootstrap.js" type="text/javascript"></script>
+	<script src="../js/angular.js" type="text/javascript"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/dictionary-module.js"></script>
+	<script src="../js/language.js" type="text/javascript"></script>
+</head>
+<body ng-controller="language">
+	<div class="container">
+		<div class="row">
+			<div class="form-group">
+				<a href="../view/file-system.html">File system</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="panel panel-default col-md-4">
+				<div class="form-group">
+					<label for="languageName">Language</label>
+					<input class="form-control" id="languageName" type="text" ng-model="languageName"/>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success" ng-click="addLanguage()">Add language</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="list-group">
+				<div class="list-group-item active">Languages</div>
+				<div class="list-group-item" ng-repeat="lang in languages | orderBy:'name'">
+					<div class="btn">{{lang.name}}</div>
+					<div class="pull-right"><button class="btn btn-danger" ng-click="deleteLanguage(lang.id)">Delete language</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

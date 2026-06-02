@@ -1,0 +1,33 @@
+<div class="col-md-6">
+	<table class="table">
+		<tr class="active">
+			<th>Word</th><th>Transcription</th><th>Answer variants</th>
+		</tr>
+		<tr ng-repeat="answerOption in wordAnswerOption.answerOptions">
+			<td class="word">
+				<div ng-if="$first">
+					<a class="word" ng-href="https://translate.google.ru/#en/ru/{{wordAnswerOption.word.value}}" target="_blank">{{wordAnswerOption.word.value}}</a>
+				</div>
+			</td>
+			<td class="word"><div ng-if="$first">{{wordAnswerOption.word.transcription}}</div></td>
+			<td class="word">
+				<input ng-if="answer.correctId == 0" type="checkbox" ng-model="answerOption.selected"/>
+				<span>
+					<span ng-if="answerOption.word.id == answer.correctId" class="text-success"><b>{{answerOption.word.value}}</b></span>
+					<span ng-if="answerOption.word.id == answer.answerId && answer.correctId != answer.answerId" class="text-danger"><b><strike>{{answerOption.word.value}}</strike></b></span>
+					<span ng-if="answerOption.word.id != answer.correctId && answerOption.word.id != answer.answerId">
+						<a class="word" ng-href="https://translate.google.ru/#ru/en/{{answerOption.word.value}}" target="_blank">{{answerOption.word.value}}</a>
+					</span>
+				</span>
+			</td>
+		</tr>
+	</table>
+	<div class=text-right>
+		<button class="btn btn-success" ng-if="!answered" ng-click="answerQuestion(true)">Answer</button>
+		<button class="btn btn-danger" ng-if="!answered" ng-click="answerQuestion(false)">Don't know</button>
+		<button class="btn btn-primary" ng-if="answered" ng-click="nextQuestion()">Next question</button>
+	</div>
+	<div>
+		<a ng-href="../view/word-translate.html?wordId={{wordAnswerOption.word.id}}" target="_blank">Translate</a>
+	</div>
+</div>

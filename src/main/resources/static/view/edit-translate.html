@@ -1,0 +1,42 @@
+<html ng-app="dictionaryModule" ng-controller="translateController">
+<head>
+	<title>{{word.value}}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="../js/url-helper.js" type="text/javascript"></script>
+	<script src="../js/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="../js/bootstrap.js" type="text/javascript"></script>
+	<script src="../js/angular.js" type="text/javascript"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/dictionary-module.js"></script>
+	<script src="../js/edit-translate.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<table class="table">
+				<tr class="active">
+					<th>Word</th><th>Transcription</th><th>Translate</th><th></th>
+				</tr>
+				<tr ng-repeat="transl in word.translates">
+					<td>
+						<div ng-if="$first">
+							<a class="word" ng-href="https://translate.google.ru/#en/ru/{{word.value}}" target="_blank">{{word.value}}</a>
+						</div>
+					</td>
+					<td><div ng-if="$first"><input class="form-control" ng-model="word.transcription"/></div></td>
+					<td ng-if="!transl.translateWord.id"><input class="form-control" ng-model="transl.translateWord.value"/></td>
+					<td ng-if="transl.translateWord.id">{{transl.translateWord.value}}</td>
+					<td><button ng-if="transl.translateWord.id" class="btn btn-danger" ng-click="deleteTranslate(transl.id)">Delete translate</button></td>
+					<td><button class="btn btn-danger" ng-if="!transl.translateWord.id && ($index > 0 || word.translates.length > 1)" ng-click="deleteTranslateRow($index)">Delete row</button></td>
+				</tr>
+			</table>
+		</div>
+		<div class="row">
+			<button class="btn btn-success" ng-click="addTranslateRow()">Add row</button>
+			<button class="btn btn-primary" ng-click="saveTranslate()">Save changes</button>
+			<button class="btn btn-danger pull-right" ng-click="fillOfSuggestion(word.id)">Fill out with suggestion</button>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<table ng-if="wordFrequencyInfo" class="table">
+<tr class="active">
+	<th class="col-md-4"><b>Words summary</b></th>
+	<th class="col-md-4"></th>
+</tr>
+<tr>
+	<td class="col-md-2">Unclassified is</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.unclassifiedSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Don't know</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.doNotKnowSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Already know</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.alreadyKnowSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Almost know</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.almostKnowSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Know</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.knowSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Total is</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.totalSize}}</td>
+</tr>
+<tr>
+	<td class="col-md-2">Known percent is</td>
+	<td class="col-md-2">{{wordFrequencyInfo.summary.knownPercent}}</td>
+</tr>
+</table>

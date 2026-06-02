@@ -1,0 +1,1 @@
+var dictionaryModule = angular.module('dictionaryModule', []);

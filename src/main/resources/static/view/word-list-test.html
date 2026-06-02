@@ -1,0 +1,66 @@
+<html ng-app="dictionaryModule" ng-controller="wordListTestController">
+<head>
+	<title>Word test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="../js/url-helper.js" type="text/javascript"></script>
+	<script src="../js/jquery-3.1.1.js" type="text/javascript"></script>
+	<script src="../js/bootstrap.js" type="text/javascript"></script>
+	<script src="../js/angular.js" type="text/javascript"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/dictionary-module.js"></script>
+	<script src="../js/word-list-test.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="container">
+		<div>
+			<a class="row" ng-href="../view/test-selection.html{{urlWithoutStatus}}">Back</a>
+		</div>
+		<div class="row">
+			<div ng-if="restCount > 0" ng-include="'fragment/word-test-form.html'"></div>
+			<div ng-if="restCount == 0">
+				<span ng-if="wrongAnswers.length > 0">
+					<button class="btn btn-primary" ng-click="repeatWrongAnswers()">Repeat wrong answers</button>
+				</span>
+				<span>
+					<button class="btn btn-primary" ng-click="repeatCurrentAnswers()">Repeat current test</button>
+				</span>
+			</div>
+			<div ng-if="restCount > 0" class="col-md-2">
+				<div>Left is {{restCount}}</div>
+				<button class="btn btn-primary" ng-if="!answered && wordAnswerOption.wordStatus != KNOW" ng-click="levelUp(wordAnswerOption.word.id)">Already know</button>
+			</div>
+			<div class="col-md-3">
+				<div>&nbsp;</div>
+				<a class="btn btn-primary"
+				   ng-href="../view/edit-translate.html?wordId={{wordAnswerOption.word.id}}" target="_blank">
+					Change translate
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<table class="table">
+				<tr class="text text-success">
+					<td><b>Correct</b></td><td><b>{{answerSummary.correct}}</b></td>
+				</tr>
+				<tr class="text text-danger">
+					<td><b>Incorrect</b></td><td><b>{{answerSummary.incorrect}}</b></td>
+				</tr>
+				<tr>
+					<td><b>Total</b></td><td><b>{{answerSummary.total}}</b></td>
+				</tr>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-md-6" ng-if="wordList.words.length > 0">
+				<div><h3>Wrong answers</h3></div>
+				<div ng-include="'fragment/translates.html'"></div>
+			</div>
+			<div class="col-md-6" ng-if="correctAnswers.length > 0">
+				<div><h3>Correct answers</h3></div>
+				<div ng-include="'fragment/correct-answers.html'"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div>
+	<div>
+		<input class="form-control" type="text" ng-model="wordSearch"/>
+	</div>
+	<table class="table">
+		<tr class="active word">
+			<th>Word</th><th>Transcription</th><th>Answer variants</th>
+		</tr>
+		<tbody ng-repeat="word in wordList.words | filter:wordSearch | orderBy:'frequency':true">
+			<tr ng-repeat="transl in word.translates">
+				<td class="word">
+					<div ng-if="$first">
+						<a class="word" ng-href="https://translate.google.ru/#en/ru/{{word.value}}" target="_blank">{{word.value}}</a>
+					</div>
+				</td>
+				<td class="word">
+					<div ng-if="$first">{{word.transcription}}</div>
+				</td>
+				<td class="word">{{transl.translateWord.value}}</td>
+				<td class="word">
+					<a class="link" ng-if="$first" ng-href="../view/word-translate.html?wordId={{word.id}}" target="_blank">Translate</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
