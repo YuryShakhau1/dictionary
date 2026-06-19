@@ -1,57 +1,52 @@
 package by.shakhau.dictionary.rest;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.servlet.ServletRequest;
-
-import by.shakhau.dictionary.persistence.domain.*;
-import by.shakhau.dictionary.service.ExistedWordService;
-import by.shakhau.dictionary.service.bean.KeyValue;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import by.shakhau.dictionary.logic.util.EntityCleaning;
 import by.shakhau.dictionary.logic.util.FileHelper;
 import by.shakhau.dictionary.logic.util.StringHelper;
+import by.shakhau.dictionary.persistence.domain.ExistedWordEntity;
+import by.shakhau.dictionary.persistence.domain.LanguageEntity;
+import by.shakhau.dictionary.persistence.domain.TextFileWordEntity;
+import by.shakhau.dictionary.persistence.domain.UserWordEntity;
+import by.shakhau.dictionary.persistence.domain.UserWordStatusEntity;
+import by.shakhau.dictionary.persistence.domain.WordEntity;
+import by.shakhau.dictionary.persistence.domain.WordTranslateEntity;
 import by.shakhau.dictionary.persistence.repository.LanguageRepository;
 import by.shakhau.dictionary.persistence.repository.TextFileWordRepository;
 import by.shakhau.dictionary.persistence.repository.TranslateRepository;
 import by.shakhau.dictionary.persistence.repository.UserWordRepository;
 import by.shakhau.dictionary.persistence.repository.UserWordStatusRepository;
 import by.shakhau.dictionary.persistence.repository.WordRepository;
+import by.shakhau.dictionary.service.ExistedWordService;
 import by.shakhau.dictionary.service.WordService;
+import by.shakhau.dictionary.service.bean.KeyValue;
+import jakarta.servlet.ServletRequest;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/normalizer")
+@AllArgsConstructor
 public class Normalizer {
 
-	@Autowired
 	private WordRepository wordRepository;
-
-	@Autowired
 	private UserWordStatusRepository userWordStatusRepository;
-
-	@Autowired
 	private WordService wordService;
-	
-	@Autowired
 	private UserWordRepository userWordRepository;
-	
-	@Autowired
 	private TextFileWordRepository textFileWordRepository;
-	
-	@Autowired
 	private TranslateRepository translateRepository;
-	
-	@Autowired
 	private LanguageRepository languageRepository;
-
-	@Autowired
 	private ExistedWordService existedWordService;
 	
 	@RequestMapping(value = "/normalize", method = RequestMethod.GET)

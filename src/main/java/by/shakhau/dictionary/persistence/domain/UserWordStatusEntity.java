@@ -2,14 +2,14 @@ package by.shakhau.dictionary.persistence.domain;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Table(name = "UserWordStatus")
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 public class UserWordStatusEntity implements Entity<Long> {
 	public static final Integer EXCLUDED = -1;
 	public static final Integer KNOW = 0;

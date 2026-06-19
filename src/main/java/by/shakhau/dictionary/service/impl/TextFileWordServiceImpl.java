@@ -1,45 +1,33 @@
 package by.shakhau.dictionary.service.impl;
 
 import by.shakhau.dictionary.logic.util.EntityCleaning;
-import by.shakhau.dictionary.logic.util.StringHelper;
-import by.shakhau.dictionary.persistence.domain.*;
+import by.shakhau.dictionary.persistence.domain.TextFileEntity;
+import by.shakhau.dictionary.persistence.domain.TextFileWordEntity;
+import by.shakhau.dictionary.persistence.domain.WordEntity;
 import by.shakhau.dictionary.persistence.repository.TextFileWordRepository;
-import by.shakhau.dictionary.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.shakhau.dictionary.service.ExistedWordService;
+import by.shakhau.dictionary.service.FolderService;
+import by.shakhau.dictionary.service.TextFileWordService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class TextFileWordServiceImpl implements TextFileWordService {
 
-	@Autowired
 	private ExistedWordService existedWordService;
-
-	@Autowired
-	private WordService wordService;
-
-	@Autowired
 	private TextFileWordRepository textFileWordRepository;
-
-	@Autowired
-	private TextFileService textFileService;
-
-	@Autowired
 	private FolderService folderService;
 
 	@Override
 	public List<TextFileWordEntity> findAll(Long userId) {
-		List<TextFileWordEntity> results = new ArrayList<>();
-		List<TextFileEntity> userFiles = textFileService.findAllFiles(userId);
-		for (TextFileEntity file : userFiles) {
-			results.addAll(findByFileId(file.getId()));
-		}
-
-		return results;
+		return textFileWordRepository.findByTextFileUserId(userId);
 	}
 
 	@Override
@@ -51,7 +39,7 @@ public class TextFileWordServiceImpl implements TextFileWordService {
 		List<TextFileWordEntity> sentenceWords = new ArrayList<>();
 		AtomicLong orderIndex = new AtomicLong(0);
 		wordTexts.forEach(wordName -> {
-			WordEntity word = wordService.findOrCreateByValuesAndLanguage(wordName);
+			WordEntity word = existedWordService.findOrCreateByValuesAndLanguage(wordName);
 
 			TextFileWordEntity sentenceWord = new TextFileWordEntity();
 			sentenceWord.setTextFile(textFile);

@@ -1,30 +1,24 @@
 package by.shakhau.dictionary.service.impl;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import by.shakhau.dictionary.logic.util.EntityCleaning;
 import by.shakhau.dictionary.persistence.domain.WordEntity;
 import by.shakhau.dictionary.persistence.domain.WordTranslateEntity;
 import by.shakhau.dictionary.persistence.repository.TranslateRepository;
+import by.shakhau.dictionary.persistence.repository.WordRepository;
 import by.shakhau.dictionary.service.FolderService;
 import by.shakhau.dictionary.service.TranslateService;
-import by.shakhau.dictionary.service.WordService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class TranslateServiceImpl implements TranslateService {
 
-	@Autowired
 	private TranslateRepository translateRepository;
-
-	@Autowired
 	private FolderService folderService;
-
-	@Autowired
-	private WordService wordService;
+	private WordRepository wordRepository;
 
 	@Override
 	public void add(WordTranslateEntity translate) {
@@ -45,7 +39,7 @@ public class TranslateServiceImpl implements TranslateService {
 		translateRepository.deleteById(translateId);
 		List<WordTranslateEntity> translates = findByTranslateWordId(translateWord.getId());
 		if (translates.isEmpty()) {
-			wordService.delete(translateWord.getId());
+			wordRepository.deleteById(translateWord.getId());
 		}
 	}
 

@@ -1,4 +1,4 @@
-package by.shakhau.dictionary.rest;
+package by.shakhau.dictionary.logic.util;
 
 import org.apache.commons.io.FileUtils;
 

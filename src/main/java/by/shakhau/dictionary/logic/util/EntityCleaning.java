@@ -1,7 +1,7 @@
 package by.shakhau.dictionary.logic.util;
 
 import by.shakhau.dictionary.persistence.domain.*;
-import org.hibernate.collection.internal.PersistentBag;
+import org.hibernate.collection.spi.PersistentBag;
 
 import java.util.Collection;
 import java.util.Collections;

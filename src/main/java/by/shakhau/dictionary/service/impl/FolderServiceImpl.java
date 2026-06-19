@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,11 @@ import by.shakhau.dictionary.presentation.bean.FolderView;
 import by.shakhau.dictionary.service.FolderService;
 
 @Service
+@AllArgsConstructor
 public class FolderServiceImpl implements FolderService {
 
-    @Autowired
     private FolderRepository folderRepository;
-    
-    @Autowired
     private TextFileRepository textFileRepository;
-
-    @Autowired
     private TextFileWordRepository textFileWordRepository;
 
     @Override

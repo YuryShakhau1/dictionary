@@ -1,24 +1,23 @@
 package by.shakhau.dictionary.service.impl;
 
-import by.shakhau.dictionary.logic.util.EntityCleaning;
 import by.shakhau.dictionary.persistence.domain.LanguageEntity;
 import by.shakhau.dictionary.persistence.repository.LanguageRepository;
 import by.shakhau.dictionary.presentation.bean.LanguagesView;
 import by.shakhau.dictionary.service.LanguageService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
 
 	private Map<String, LanguageEntity> cache = new HashMap<>();
 
-    @Autowired
     private LanguageRepository languageRepository;
 
     @Override

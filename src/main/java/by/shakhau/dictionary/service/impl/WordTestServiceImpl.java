@@ -1,19 +1,5 @@
 package by.shakhau.dictionary.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import by.shakhau.dictionary.logic.util.EntityTransformer;
 import by.shakhau.dictionary.persistence.domain.UserWordEntity;
 import by.shakhau.dictionary.persistence.domain.UserWordStatusEntity;
@@ -27,19 +13,28 @@ import by.shakhau.dictionary.service.TranslateService;
 import by.shakhau.dictionary.service.UserWordService;
 import by.shakhau.dictionary.service.UserWordStatusService;
 import by.shakhau.dictionary.service.WordTestService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class WordTestServiceImpl implements WordTestService {
 	private static final Random RANDOM = new Random();
 	private static final int ANSWER_COUNT = 5;
 
-	@Autowired
 	private TranslateService translateService;
-	
-	@Autowired
 	private UserWordService userWordService;
-
-	@Autowired
 	private UserWordStatusService userWordStatusService;
 
 	@Override

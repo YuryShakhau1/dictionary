@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import by.shakhau.dictionary.service.bean.WordInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import by.shakhau.dictionary.logic.util.EntityCleaning;
@@ -27,24 +27,14 @@ import by.shakhau.dictionary.service.UserWordStatusService;
 import by.shakhau.dictionary.service.WordService;
 
 @Service
+@AllArgsConstructor
 public class UserWordServiceImpl implements UserWordService {
 
-	@Autowired
 	private UserWordRepository userWordRepository;
-
-	@Autowired
     private TextFileWordService textFileWordService;
-
-	@Autowired
 	private UserWordStatusService userWordStatusService;
-	
-	@Autowired
 	private TranslateService translateService;
-	
-	@Autowired
 	private WordService wordService;
-	
-	@Autowired
 	private FolderService folderService;
 
     @Override
@@ -108,7 +98,24 @@ public class UserWordServiceImpl implements UserWordService {
 			? userWordRepository.findByUserIdAndStatusStatus(userId, wordStatus)
 			: userWordRepository.findByUserId(userId);
 	}
-	
+
+	@Override
+	public List<WordEntity> findWithUserTranslate(Long userId, Long folderId, Long fileId, Integer wordStatus) {
+		List<WordTranslateEntity> translates = null;
+		if (fileId != null) {
+			translates = translateService.findByTextFileId(fileId, userId);
+		} else if (folderId != null) {
+			translates = translateService.findInFolderByFolderId(folderId, userId);
+		} else {
+			translates = translateService.findByUserId(userId);
+		}
+		Set<Long> userWordIds = findWordIdByUserIdAndWordStatus(userId, wordStatus);
+
+		translates = translates.stream().filter(x -> userWordIds.contains(x.getSourceWord().getId()))
+				.collect(Collectors.toList());
+		return wordService.transformTranslatesToWords(translates);
+	}
+
 	@Override
 	public TextFrequencyView wordFrequency(
 			Long userId, Long folderId, Long fileId, Integer wordStatus, Integer wordStatusFrom) {

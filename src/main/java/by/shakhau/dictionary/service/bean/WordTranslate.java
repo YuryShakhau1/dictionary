@@ -3,7 +3,7 @@ package by.shakhau.dictionary.service.bean;
 import by.shakhau.dictionary.persistence.domain.Entity;
 import by.shakhau.dictionary.persistence.domain.WordEntity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 public class WordTranslate implements Entity<Long> {
 

@@ -7,29 +7,20 @@ import by.shakhau.dictionary.persistence.domain.TextFileWordEntity;
 import by.shakhau.dictionary.persistence.repository.FolderRepository;
 import by.shakhau.dictionary.persistence.repository.TextFileRepository;
 import by.shakhau.dictionary.presentation.bean.TextFilesView;
-import by.shakhau.dictionary.service.LanguageService;
 import by.shakhau.dictionary.service.TextFileService;
 import by.shakhau.dictionary.service.TextFileWordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.List;
 
-
 @Service
+@AllArgsConstructor
 public class TextFileServiceImpl implements TextFileService {
-	
-	@Autowired
-    private TextFileWordService textFileWordService;
-	
-	@Autowired
-    private LanguageService languageService;
-	
-    @Autowired
-    private TextFileRepository textFileRepository;
 
-    @Autowired
+    private TextFileWordService textFileWordService;
+    private TextFileRepository textFileRepository;
     private FolderRepository folderRepository;
 
     @Override

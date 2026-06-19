@@ -1,10 +1,11 @@
 package by.shakhau.dictionary.rest;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
+import by.shakhau.dictionary.persistence.domain.WordEntity;
+import by.shakhau.dictionary.service.WordService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,19 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import by.shakhau.dictionary.persistence.domain.WordEntity;
-import by.shakhau.dictionary.service.WordService;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequestMapping("/word")
+@AllArgsConstructor
 public class WordResource {
 
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-	@Autowired
 	private WordService wordService;
 	
 	@RequestMapping(value = "/export", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

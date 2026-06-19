@@ -1,22 +1,23 @@
 package by.shakhau.dictionary.rest;
 
 import by.shakhau.dictionary.service.ImportExportService;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/export")
+@AllArgsConstructor
 public class ExportResource {
 
     public static final Long USER_ID = 1L;
 
-    @Autowired
     private ImportExportService importExportService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

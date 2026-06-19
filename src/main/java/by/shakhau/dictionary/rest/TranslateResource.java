@@ -1,9 +1,12 @@
 package by.shakhau.dictionary.rest;
 
-import java.util.List;
-
+import by.shakhau.dictionary.persistence.domain.WordEntity;
+import by.shakhau.dictionary.service.LoadTranslateService;
+import by.shakhau.dictionary.service.TranslateService;
+import by.shakhau.dictionary.service.UserWordService;
+import by.shakhau.dictionary.service.WordService;
 import by.shakhau.dictionary.service.bean.Word;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,22 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import by.shakhau.dictionary.persistence.domain.WordEntity;
-import by.shakhau.dictionary.service.LoadTranslateService;
-import by.shakhau.dictionary.service.TranslateService;
-import by.shakhau.dictionary.service.WordService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/translate")
+@AllArgsConstructor
 public class TranslateResource {
 
-	@Autowired
 	private WordService wordService;
-	
-	@Autowired
+	private UserWordService userWordService;
 	private TranslateService translateService;
-
-	@Autowired
 	private LoadTranslateService loadTranslateService;
 	
 	@RequestMapping(value = "/word", method = RequestMethod.GET)
@@ -55,7 +52,7 @@ public class TranslateResource {
 			@RequestParam(required = false) Long folderId,
 			@RequestParam(required = false) Long fileId,
 			@RequestParam(required = false) Integer wordStatus) {
-		return wordService.findWithUserTranslate(ExportResource.USER_ID, folderId, fileId, wordStatus);
+		return userWordService.findWithUserTranslate(ExportResource.USER_ID, folderId, fileId, wordStatus);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

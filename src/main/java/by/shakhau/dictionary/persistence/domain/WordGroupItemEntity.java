@@ -1,9 +1,9 @@
 package by.shakhau.dictionary.persistence.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Table(name = "WordGroupItem")
 public class WordGroupItemEntity implements Entity<Long> {
 

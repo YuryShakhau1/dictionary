@@ -3,6 +3,7 @@ package by.shakhau.dictionary.rest;
 import by.shakhau.dictionary.persistence.domain.WordGroupEntity;
 import by.shakhau.dictionary.persistence.domain.WordGroupItemEntity;
 import by.shakhau.dictionary.service.WordGroupService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/word-group")
+@AllArgsConstructor
 public class WordGroupResource {
 
-    @Autowired
     private WordGroupService wordGroupService;
 
     @GetMapping("/list")

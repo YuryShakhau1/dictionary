@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,12 @@ import by.shakhau.dictionary.service.LanguageService;
 import by.shakhau.dictionary.service.LoadTranslateService;
 import by.shakhau.dictionary.service.WordService;
 
-
 @Service
+@AllArgsConstructor
 public class LoadTranslateServiceImpl implements LoadTranslateService {
 	private static final int MAX_TRANSLATE_COUNT = 5;
 
-	@Autowired
 	private LanguageService languageService;
-
-	@Autowired
 	private WordService wordService;
 	
 	@Override

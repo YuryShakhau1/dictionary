@@ -1,11 +1,15 @@
 package by.shakhau.dictionary.rest;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import by.shakhau.dictionary.logic.util.StringHelper;
+import by.shakhau.dictionary.persistence.domain.FolderEntity;
+import by.shakhau.dictionary.persistence.domain.TextFileEntity;
+import by.shakhau.dictionary.presentation.bean.FolderView;
+import by.shakhau.dictionary.presentation.bean.TextFilesView;
+import by.shakhau.dictionary.service.FolderService;
+import by.shakhau.dictionary.service.LanguageService;
+import by.shakhau.dictionary.service.TextFileService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,27 +22,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.shakhau.dictionary.logic.util.StringHelper;
-import by.shakhau.dictionary.persistence.domain.FolderEntity;
-import by.shakhau.dictionary.persistence.domain.TextFileEntity;
-import by.shakhau.dictionary.presentation.bean.FolderView;
-import by.shakhau.dictionary.presentation.bean.TextFilesView;
-import by.shakhau.dictionary.service.FolderService;
-import by.shakhau.dictionary.service.LanguageService;
-import by.shakhau.dictionary.service.TextFileService;
+import java.io.IOException;
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/fileSystem")
+@AllArgsConstructor
 public class FileSystemResource {
 
-    @Autowired
     private FolderService folderService;
-
-    @Autowired
     private TextFileService textFileService;
-
-    @Autowired
     private LanguageService languageService;
     
     @RequestMapping(

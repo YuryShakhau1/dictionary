@@ -1,34 +1,33 @@
 package by.shakhau.dictionary.rest;
 
-import java.io.File;
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import by.shakhau.dictionary.logic.util.StringHelper;
-import by.shakhau.dictionary.persistence.domain.*;
-import by.shakhau.dictionary.persistence.repository.ExistedWordRepository;
-import by.shakhau.dictionary.service.LanguageService;
+import by.shakhau.dictionary.persistence.domain.UserWordEntity;
+import by.shakhau.dictionary.presentation.bean.TextFrequencyView;
+import by.shakhau.dictionary.presentation.bean.UserWordsView;
+import by.shakhau.dictionary.service.UserWordService;
 import by.shakhau.dictionary.service.bean.WordInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import by.shakhau.dictionary.presentation.bean.TextFrequencyView;
-import by.shakhau.dictionary.presentation.bean.UserWordsView;
-import by.shakhau.dictionary.service.UserWordService;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 @Service
 @RequestMapping("/userWord")
+@AllArgsConstructor
 public class UserWordResource {
 
-	@Autowired
 	private UserWordService userWordService;
-    @Autowired
-    private ExistedWordRepository existedWordRepository;
 
 	@GetMapping(value = "/list")
 	public @ResponseBody UserWordsView wordList() {

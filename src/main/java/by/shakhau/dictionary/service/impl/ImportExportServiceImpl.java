@@ -21,6 +21,7 @@ import by.shakhau.dictionary.service.bean.export.UserWordStatus;
 import by.shakhau.dictionary.service.bean.export.Word;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,27 +33,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ImportExportServiceImpl implements ImportExportService {
 
-    @Autowired
     private LanguageService languageService;
-
-    @Autowired
     private FolderService folderService;
-
-    @Autowired
     private TextFileService textFileService;
-
-    @Autowired
     private WordService wordService;
-
-    @Autowired
     private UserWordStatusService userWordStatusService;
-
-    @Autowired
     private UserWordService userWordService;
-
-    @Autowired
     private TextFileWordService textFileWordService;
 
     public String exportAll(Long userId) {

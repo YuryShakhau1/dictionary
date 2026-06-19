@@ -5,19 +5,16 @@ import by.shakhau.dictionary.persistence.domain.WordGroupItemEntity;
 import by.shakhau.dictionary.persistence.repository.WordGroupItemRepository;
 import by.shakhau.dictionary.persistence.repository.WordGroupRepository;
 import by.shakhau.dictionary.service.WordGroupService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class WordGroupServiceImpl implements WordGroupService {
 
-    @Autowired
     private WordGroupRepository repository;
-
-    @Autowired
     private WordGroupItemRepository wordGroupItemRepository;
 
     @Override

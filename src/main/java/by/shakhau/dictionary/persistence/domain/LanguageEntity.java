@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Table(name = "Language")
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 public class LanguageEntity implements Entity<Long> {
     public static final String EN = "EN";
     public static final String RU = "RU";

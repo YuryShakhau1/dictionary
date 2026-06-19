@@ -10,5 +10,6 @@ public interface TextFileWordRepository extends JpaRepository<TextFileWordEntity
 	List<TextFileWordEntity> findByTextFileId(Long fileId);
 	List<TextFileWordEntity> findByTextFileFolderId(Long fileId);
 	List<TextFileWordEntity> findByTextFileFolderIdIn(List<Long> fileIds);
+	List<TextFileWordEntity> findByTextFileUserId(Long userId);
 	List<TextFileWordEntity> findByWordId(Long wordId);
 }

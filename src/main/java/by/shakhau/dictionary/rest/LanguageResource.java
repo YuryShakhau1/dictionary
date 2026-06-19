@@ -1,6 +1,8 @@
 package by.shakhau.dictionary.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import by.shakhau.dictionary.presentation.bean.LanguagesView;
+import by.shakhau.dictionary.service.LanguageService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import by.shakhau.dictionary.presentation.bean.LanguagesView;
-import by.shakhau.dictionary.service.LanguageService;
-
 @RestController
 @RequestMapping("/language")
+@AllArgsConstructor
 public class LanguageResource {
 
-    @Autowired
     private LanguageService languageService;
     
     @RequestMapping(
